@@ -2,6 +2,7 @@ import Head from "next/head";
 import React from "react";
 import Link from "next/link";
 import Footer from "../../components/Footer";
+import ResultGrid from "../../components/ResultGrid";
 
 interface ISearch {
   searchTerm: string;
@@ -24,13 +25,7 @@ const Search: React.FC<ISearch> = ({ searchTerm, giphys }) => {
       </p>
       <h1>Search results for: {searchTerm} </h1>
 
-      <div className="cat-gifs">
-        {giphys.map((data) => (
-          <div>
-            <img className="cat-image" src={data} />
-          </div>
-        ))}
-      </div>
+      <ResultGrid searchResults={giphys} />
       <Footer />
     </>
   );

@@ -3,15 +3,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
+import ResultGrid from "../components/ResultGrid";
 
-export default function Home(initialData) {
+export default function Home({ catGiphys }) {
   const [formInputs, setFormInputs] = useState({});
   const [searchTerm, setSearchTerm] = useState("cats");
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    setSearchResults(initialData.catGiphys);
-  }, [initialData]);
+    setSearchResults(catGiphys);
+  }, [catGiphys]);
 
   const handleInputs = (event) => {
     const { name, value } = event.target;
@@ -55,13 +56,7 @@ export default function Home(initialData) {
         <Link href="/search/[searchTerm]" as={`/search/${searchTerm}`}>
           <a>{`http://localhost:3000/search/${searchTerm}`}</a>
         </Link>
-        <div className="cat-gifs">
-          {searchResults.map((data) => (
-            <div>
-              <img className="cat-image" src={data} />
-            </div>
-          ))}
-        </div>
+        <ResultGrid searchResults={searchResults} />
       </main>
       <Footer />
     </div>
